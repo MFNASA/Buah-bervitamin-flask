@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html' %}
+{% block title %} Edit Produk {% endblock %}
+{% block content %}
+<section style="margin-top: 150px;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Edit Produk</h2>
+                <hr style="color: dark;">
+                <form action="/update-product/{{produk[0]}}" method="post">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Nama buah</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{produk[1]}}" name="name_product" placeholder="Masukan Nama buah">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Link Gambar</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" value="{{produk[2]}}" name="image_url" placeholder="Masukan link gambar">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">manfaat</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" value="{{produk[3]}}" name="manfaat" placeholder="Masukan manfaat">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="formGroupExampleInput2" class="form-label">vitamin</label>
+                            <select name="vitamin" class="form-control">
+                                <option selected>{{ produk[4] }}</option>
+                                {% for kategori in kategori%}
+                                <option value="{{ kategori[0] }}">{{ kategori[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="formGroupExampleInput2" class="form-label">kategori</label>
+                            <select name="kategori" class="form-control">
+                                <option selected>{{ produk[5] }}</option>
+                                <option value="1">lokal</option>
+                                <option value="0">import</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="formGroupExampleInput2" class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput2" value="{{produk[6]}}" name="deskripsi" placeholder="Masukan Deskripsi">
+                        </div>
+                    </div>
+                    <a class="btn btn-secondary" href="/add-product" role="button">Kembali</a>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

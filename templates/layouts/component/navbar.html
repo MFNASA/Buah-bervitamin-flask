@@ -1,0 +1,75 @@
+<style>
+  /* Melebarkan tinggi navbar */
+  .navbar {
+    padding: 10rem 10rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="/">BUAH BERVITAMIN</a>
+    
+    <!-- Toggler Button for Mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Beranda</a>
+        </li>
+        <!-- About -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">Tentang</a>
+        </li>
+        
+        {% if session.get('admin') %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/product' %}active{% endif %}" href="/product">buah</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/add-product' %}active{% endif %}" href="/add-product">tambah item</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/admin/messages' %}active{% endif %}" href="/admin/messages">Pesan Masuk</a>
+        </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/product' %}active{% endif %}" href="/product">buah</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/contact' %}active{% endif %}" href="/contact">Kontak</a>
+          </li>
+        {% endif %}
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        <li class ="nav-item">
+          <form class="d-flex" action="/search" method="get">
+              <input class="form-control me-1" type="search" name="query" placeholder="Pencarian buah" aria-label="Search">
+              <button class="btn btn-outline-light" type="submit">Cari</button>
+          </form>
+          
+      </li>
+        {% if session.get('admin') %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/logout' %}active{% endif %}" href="/logout">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/login' %}active{% endif %}" href="/login">Login</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

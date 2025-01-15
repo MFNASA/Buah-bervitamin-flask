@@ -1,0 +1,105 @@
+{%extends 'layouts/base.html'%}
+
+{%block title%}add product {%endblock%}
+{%block content%} 
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}   
+        {% for category, message in messages %}
+           <script>
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "{{ message }}",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+           </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<section>
+    <div class="container" style="margin-top: 150px;">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="text-dark">Data buah</h3>
+            </div>
+            <!-- BOTTON INPUT -->
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Tambah item
+                </button>
+            </div>
+        </div>
+        <hr style="color: dark;">
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col">
+                <!-- TABLE PRODUCT -->
+                {% include 'layouts/component/list-product.html'%}    
+                            
+                <!-- MODAL POP UP -->
+                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah item</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="/save-product" method="post">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="mb-2" for="form-label">Nama buah</label>
+                                        <input type="text" name="name_product" class="form-control " placeholder="Masukan Nama buah">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-2" for="form-label">Link Gambar</label>
+                                        <input type="text" name="image_url" class="form-control" placeholder="Masukan Link Gambar">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-2" for="form-label">manfaat</label>
+                                        <input type="text" name="manfaat" class="form-control" placeholder="Masukan manfaat">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-2" for="form-label">vitamin</label>
+                                        <select name="vitamin" class="form-control">
+                                            <option selected>-- Pilih vitamin --</option>
+                                            {% for kategori in kategori%}
+                                            <option value="{{ kategori[0] }}">{{ kategori[1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-2" for="form-label">kategori</label>
+                                        <select name="kategori" class="form-control">
+                                            <option selected>-- Pilih kategori --</option>
+                                            <option value="1">lokal</option>
+                                            <option value="0">import</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-2" for="form-label">Deskripsi</label>
+                                        <input type="text" name="deskripsi" class="form-control" placeholder="Masukan Deskripsi">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <div id="liveAlertPlaceholder"></div>
+                                    <button type="submit" class="btn btn-dark" id="liveAlertBtn">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%} 

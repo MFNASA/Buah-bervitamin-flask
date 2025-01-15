@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Detail Product{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container" style="margin-top: 150px;">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="p-2">
+                    <div class="text-center">
+                        <img src="{{ detail[2] }}" class="rounded" alt="background hp" width="95%">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 d-flex">
+                <div class="p-2 w-100">
+                    <div class="title mt-4">
+                        <h1>{{ detail[1] }}</h1>
+                        <p><strong>manfaat :</strong> {{ detail[3]}}</p>
+                        <p><strong>vitamin:</strong> {{ detail[7]}}</p>
+                        <p><strong>kategori :</strong> {{'import' if produk[5] == True else 'lokal'}}</p>
+                        <p><strong>deskripsi </strong></p>
+                        <p class="lh-1">{{ detail[6] }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div style="margin-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>buah Lainnya</h2>
+                    <hr class="mb-5" style="color: dark;">
+                </div>
+            </div>    
+        </div>
+        {% include 'layouts/component/card.html' %}
+    </div>
+</section>
+{% endblock %}
